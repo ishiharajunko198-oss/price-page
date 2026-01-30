@@ -7,6 +7,10 @@ import { MONTHLY_PLANS, YEARLY_PLANS, FAQS } from './constants';
 
 const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<'PLANS' | 'API'>('PLANS');
+  const [discountCode, setDiscountCode] = useState('');
+  const [discountRate, setDiscountRate] = useState(0); // 0.2 means 20% off
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [discountMessage, setDiscountMessage] = useState('');
 
   const freePlan = MONTHLY_PLANS[0];
   const allPaidPlans = [
@@ -15,6 +19,42 @@ const App: React.FC = () => {
     YEARLY_PLANS[1],    // Advanced Yearly
     YEARLY_PLANS[2]     // VIP Yearly
   ];
+
+  // Handle discount code input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDiscountCode(value);
+    
+    // Logic: If input is cleared, restore pricing to original
+    if (value === '') {
+      setDiscountRate(0);
+      setDiscountMessage('');
+    }
+  };
+
+  // Placeholder for backend API interaction
+  const handleApplyDiscount = async () => {
+    if (!discountCode.trim()) return;
+    
+    setIsVerifying(true);
+    setDiscountMessage('');
+
+    // SIMULATED API CALL: Replace this with your actual fetch call
+    setTimeout(() => {
+      const code = discountCode.toUpperCase();
+      if (code === 'OFF20') {
+        setDiscountRate(0.2);
+        setDiscountMessage('20%オフクーポンが適用されました！');
+      } else if (code === 'SPECIAL') {
+        setDiscountRate(0.1);
+        setDiscountMessage('10%オフクーポンが適用されました！');
+      } else {
+        setDiscountRate(0);
+        setDiscountMessage('無効なクーポンコードです。');
+      }
+      setIsVerifying(false);
+    }, 600);
+  };
 
   return (
     <div className="app-container pb-5">
@@ -54,26 +94,54 @@ const App: React.FC = () => {
       <section className="container-fluid container-xxl" style={{ marginBottom: '100px', maxWidth: '1440px' }}>
         {viewMode === 'PLANS' ? (
           <div className="pricing-unified-container">
+            {/* Refined Discount Code Section */}
+            <div className="discount-section">
+              <div className="discount-guide">
+                <div>クーポンコードをお持ちですか?入力すると割引後の価格をご確認いただけます。</div>
+                {discountRate > 0 && (
+                  <div className="text-danger fw-bold mt-1">割引は定価から適用されます！</div>
+                )}
+              </div>
+              <div className="d-flex flex-column align-items-end gap-1">
+                <div className="discount-input-group shadow-sm">
+                  <input 
+                    type="text" 
+                    placeholder="クーポンコードを入力" 
+                    value={discountCode}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => e.key === 'Enter' && handleApplyDiscount()}
+                  />
+                  <button 
+                    className="discount-btn" 
+                    onClick={handleApplyDiscount}
+                    disabled={isVerifying}
+                  >
+                    {isVerifying ? '確認中' : '適用'}
+                  </button>
+                </div>
+                {discountMessage && (
+                  <span className={`small fw-bold mt-1 ${discountRate > 0 ? 'text-success' : 'text-danger'}`} style={{ fontSize: '0.75rem' }}>
+                    {discountMessage}
+                  </span>
+                )}
+              </div>
+            </div>
+
             <div className="pricing-grid">
-              {/* Row 1: Refined Group Labels */}
+              {/* Row 1: Group Labels */}
               <div className="spacer-cell d-none d-lg-block"></div>
               
-              {/* Free Plan Area: Label Removed */}
-              <div className="group-title-cell d-none d-lg-flex">
-                {/* Space maintained for alignment, label removed per request */}
-              </div>
+              <div className="group-title-cell d-none d-lg-flex"></div>
               
-              {/* Monthly Group (Covers ONLY Standard Monthly) */}
               <div className="group-title-cell d-none d-lg-flex">
                 <div className="group-title-label label-monthly">
                   月間プラン
                 </div>
               </div>
               
-              {/* Yearly Group (Covers 3 Yearly Plans) */}
               <div className="group-title-cell d-none d-lg-flex" style={{ gridColumn: 'span 3' }}>
-                <div className="group-title-label label-yearly">
-                  年間プラン <span className="savings-pill">お得! 30%OFF</span>
+                <div className="group-title-label label-yearly" style={{ position: 'relative' }}>
+                  年間プラン <span className="savings-pill">お得！2ヶ月分無料</span>
                 </div>
               </div>
 
@@ -81,13 +149,12 @@ const App: React.FC = () => {
               <div className="pricing-card-spacer d-none d-lg-block"></div>
               
               <PricingCard plan={freePlan} isFirst={true} />
-              <PricingCard plan={allPaidPlans[0]} />
-              <PricingCard plan={allPaidPlans[1]} />
-              <PricingCard plan={allPaidPlans[2]} />
-              <PricingCard plan={allPaidPlans[3]} isLast={true} />
+              <PricingCard plan={allPaidPlans[0]} discountRate={discountRate} />
+              <PricingCard plan={allPaidPlans[1]} isRecommended={true} discountRate={discountRate} />
+              <PricingCard plan={allPaidPlans[2]} discountRate={discountRate} />
+              <PricingCard plan={allPaidPlans[3]} isLast={true} discountRate={discountRate} />
             </div>
 
-            {/* Seamless Comparison Table */}
             <ComparisonTable plans={allPaidPlans} freePlan={freePlan} />
           </div>
         ) : (
@@ -95,13 +162,13 @@ const App: React.FC = () => {
              <div className="api-banner shadow-lg text-center py-5">
                 <h2 className="mb-4">APIインターフェース</h2>
                 <p className="lead mb-4 px-4">
-                  システム連携や大量数据取得が必要な場合は、API専用プランをご案内いたします。
+                  系统連携や大量数据取得が必要な場合は、API専用プランをご案内いたします。
                 </p>
                 <div className="p-4 bg-white rounded text-dark d-inline-block text-start mb-4 shadow-sm mx-3">
                   <p className="mb-2 fw-bold text-warning">APIの主な機能：</p>
                   <ul className="mb-0 small">
                     <li>全13カ国のリアルタイム市場データ直接取得</li>
-                    <li>キーワード逆引き・商品リサーチの自動化</li>
+                    <li>キーワード逆引き・商品リサーチの自动化</li>
                     <li>自社BIツールやERPへのシームレスな数据連携</li>
                   </ul>
                 </div>

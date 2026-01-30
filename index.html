@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amazon出品者向け料金プラン｜セラースプライト</title>
-    <meta name="description" content="Amazon出品者向け数据分析ツールセラースプライトの料金プラン一覧。無料プランから本格運営向けプランまで、用途別にわかりやすく比較。" />
+    <meta name="description" content="Amazon出品者向け数据分析ツールセラースプライトの料金プラン一覧。無料プランから本格運営向けプランまで、用途別にわかりやすく比较。" />
     
     <!-- Open Graph -->
     <meta property="og:title" content="Amazon出品者向け料金プラン｜セラースプライト" />
-    <meta property="og:description" content="Amazon出品者向けデータ分析ツールセラースプライトの料金プラン一覧。" />
+    <meta property="og:description" content="Amazon出品者向け数据分析ツールセラースプライトの料金プラン一覧。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sellersprite.com/jp/price" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -23,11 +22,12 @@
       :root {
         --ss-orange: #f5a623;
         --ss-orange-dark: #e59512;
-        --ss-blue: #0066ff;
-        --ss-blue-light: #e7f3ff;
+        --ss-blue: #1b75bb;
+        --ss-blue-light: #eef5ff;
         --ss-text-dark: #333333;
         --ss-bg-light: #f8f9fa;
         --ss-card-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        --ss-hover-shadow: 0 20px 50px rgba(0,0,0,0.15);
         --table-border: #edf2f7;
       }
       body {
@@ -74,13 +74,79 @@
         border-right: 1px solid rgba(255,255,255,0.8);
       }
 
+      /* Discount Input Section Refined */
+      .discount-section {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .discount-guide {
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 500;
+        max-width: 500px;
+        text-align: right;
+      }
+      .discount-input-group {
+        display: flex;
+        background: #fff;
+        border: 2px solid #e1e1e1;
+        border-radius: 8px;
+        padding: 3px;
+        width: 300px; /* Slightly wider to ensure row integrity */
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        flex-shrink: 0;
+      }
+      .discount-input-group:focus-within {
+        border-color: var(--ss-orange);
+        box-shadow: 0 4px 12px rgba(245, 166, 35, 0.15);
+      }
+      .discount-input-group input {
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        width: 100%;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--ss-text-dark);
+        min-width: 0; /* Allows shrinking within flex */
+      }
+      .discount-input-group input::placeholder {
+        color: #bbb;
+      }
+      .discount-btn {
+        background: var(--ss-orange);
+        color: #fff;
+        border: none;
+        padding: 0 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+        white-space: nowrap; /* Forces text to stay in one line */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .discount-btn:hover { 
+        background: var(--ss-orange-dark);
+      }
+      .discount-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
       /* Unified Pricing Block */
       .pricing-unified-container {
         display: flex;
         flex-direction: column;
         width: 100%;
         margin-top: -140px; 
-        filter: drop-shadow(var(--ss-card-shadow));
       }
 
       .pricing-grid {
@@ -91,70 +157,60 @@
         width: 100%;
       }
 
-      /* Group Labels - Precision Installation */
+      /* Group Labels */
       .group-title-cell {
         padding: 0;
         display: flex;
         align-items: flex-end;
         position: relative;
-        z-index: 2;
+        z-index: 5;
       }
 
       .group-title-label {
-        width: 100%;
-        padding: 14px 10px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        height: 64px; 
         border-radius: 12px 12px 0 0;
-        font-weight: 800;
-        font-size: 0.9rem;
+        font-weight: 700;
+        font-size: 1rem;
         text-align: center;
-        border: 1px solid #eee;
-        border-bottom: none;
-        background: white;
-        letter-spacing: 0.05em;
-        margin-bottom: -1px; /* Integrated with card border */
+        background: var(--ss-blue);
+        color: white;
+        border: none;
+        margin-bottom: -1px;
         box-sizing: border-box;
       }
 
-      /* Fix horizontal gaps in grid labels */
-      .group-title-cell:not(:nth-child(2)) .group-title-label {
-        margin-left: -1px;
-        width: calc(100% + 1px); /* Compressing borders to remove gaps */
+      .label-monthly {
+        width: calc(100% - 6px);
+        margin-right: 6px;
       }
 
-      .label-monthly { background: #eef5ff; color: var(--ss-blue); border-top: 5px solid var(--ss-blue); }
-      .label-yearly { background: #fff8ee; color: var(--ss-orange-dark); border-top: 5px solid var(--ss-orange); }
+      .group-title-cell[style*="grid-column: span 3"] .group-title-label {
+        width: calc(100% - 6px);
+        margin-left: 6px;
+      }
 
+      /* Savings Pill */
       .savings-pill {
         background: #ff4d4f;
         color: white;
-        font-size: 0.7rem;
-        padding: 1px 8px;
+        font-size: 0.95rem; 
+        padding: 6px 16px;   
         border-radius: 20px;
-        margin-left: 6px;
-        font-weight: 700;
+        margin-left: 10px;
+        font-weight: 800;
         display: inline-block;
+        vertical-align: middle;
+        box-shadow: 0 2px 8px rgba(255, 77, 79, 0.3);
       }
 
-      /* Audience Embedded Card Style */
-      .audience-embedded-card {
-        background: #f1f3f5;
-        border: 1px solid #e9ecef;
-        border-radius: 6px;
-        padding: 6px 10px;
-        font-size: 0.72rem;
-        color: #495057;
-        font-weight: 500;
-        display: inline-block;
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        margin: 10px 0;
-        width: 90%;
-      }
-
-      /* Card Border Logic */
+      /* Card Style */
       .pricing-card {
         border: 1px solid #eee;
         border-bottom: none; 
-        border-radius: 0;
+        border-radius: 0 !important; 
         height: 100%;
         background: white;
         display: flex;
@@ -163,42 +219,79 @@
         z-index: 1;
         margin-left: -1px;
         box-sizing: border-box;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s;
       }
-      
-      .pricing-card-first { border-top-left-radius: 16px; margin-left: 0; }
-      .pricing-card-last { border-top-right-radius: 16px; }
 
-      .pricing-card.card-recommended { 
-        border: 2px solid var(--ss-orange); 
-        border-top-width: 5px; 
+      /* Update: Only show hover effect when the purchase button is hovered */
+      .pricing-card:has(.btn-payment:hover) {
+        transform: translateY(-10px);
+        box-shadow: var(--ss-hover-shadow);
+        z-index: 20;
+        border-bottom: 1px solid #eee; 
+      }
+
+      /* Disable Hover Effect for Free Plan - handled by :has rule if desired, but explicitly here too */
+      .pricing-card.card-free:has(.btn-payment:hover) {
+        transform: none;
+        box-shadow: none;
+        z-index: 1;
         border-bottom: none;
-        z-index: 5;
-        background: #fffdf9;
-        margin-top: -8px; 
-        padding-top: 8px;
-        border-radius: 12px 12px 0 0;
+      }
+
+      /* Recommended Card styling */
+      .pricing-card.card-recommended { 
+        z-index: 10;
+        background: #fff; 
+        margin-top: 0;    
+        padding-top: 0;   
+        border-radius: 0 !important;
       }
       
+      /* Ribbon Style Badge */
       .badge-recommended {
         position: absolute;
         top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #ff4d4f;
+        left: 8px; 
+        background-color: var(--ss-orange);
         color: white;
-        padding: 4px 16px;
-        border-radius: 30px;
+        padding: 8px 4px 12px 4px;
         font-weight: 700;
         z-index: 25;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
+        width: 38px;
+        line-height: 1.1;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+      }
+
+      .badge-recommended span {
+        display: block;
+        letter-spacing: 0.1em;
+      }
+
+      .price-main { font-weight: 800; color: var(--ss-text-dark); letter-spacing: -0.5px; transition: all 0.3s; }
+      .price-strikethrough { 
+        text-decoration: line-through; 
+        color: #999; 
+        font-size: 0.9rem; 
+        margin-right: 5px;
+      }
+      .discount-applied-badge {
+        background: #e6f7ff;
+        color: #1890ff;
+        font-size: 0.7rem;
+        padding: 1px 4px;
+        border-radius: 3px;
+        margin-left: 5px;
+        vertical-align: middle;
       }
       
-      .price-main { font-weight: 800; color: var(--ss-text-dark); letter-spacing: -0.5px; }
       .price-original { color: #ccc; text-decoration: line-through; font-size: 0.85rem; margin-bottom: -5px; display: block; }
       
-      .btn-payment { font-weight: 700; border-radius: 6px; padding: 10px; border: none; width: 100%; font-size: 0.9rem; }
+      .btn-payment { font-weight: 700; border-radius: 6px; padding: 10px; border: none; width: 100%; font-size: 0.9rem; transition: transform 0.2s; }
       .btn-subscription { background-color: var(--ss-orange); color: white; }
-      .btn-subscription:hover { background-color: var(--ss-orange-dark); }
+      .btn-subscription:hover { background-color: var(--ss-orange-dark); transform: scale(1.02); }
       .btn-free { background-color: white; color: var(--ss-blue); border: 1px solid var(--ss-blue); }
       
       .metric-list {
@@ -213,15 +306,16 @@
         justify-content: space-between;
         border-bottom: 1px dotted #eee;
       }
-      .metric-label { color: #888; }
-      .metric-value { font-weight: 700; color: #333; }
+      .metric-label { color: #000; }
+      .metric-value { font-weight: 800; color: #000; }
 
       .comparison-table-wrapper {
         background: white;
-        border-radius: 0 0 16px 16px;
+        border-radius: 16px 0 16px 16px; 
         overflow: hidden;
         border: 1px solid #eee;
         margin-top: -1px;
+        box-shadow: var(--ss-card-shadow);
       }
       .comparison-table {
         width: 100%;
@@ -242,7 +336,7 @@
         padding-left: 20px; 
         color: #777; 
         width: 200px;
-        background: #fafafa;
+        background: #eff6fb; 
       }
       
       @media (max-width: 1400px) {
@@ -253,7 +347,10 @@
       @media (max-width: 1100px) {
         .pricing-grid { display: flex; flex-direction: column; }
         .group-title-cell { display: none; }
-        .pricing-card { border-bottom: 1px solid #eee !important; border-radius: 16px !important; margin-bottom: 20px; margin-left: 0; }
+        .discount-section { justify-content: center; text-align: center; flex-direction: column; }
+        .discount-guide { text-align: center; }
+        .pricing-card { border-bottom: 1px solid #eee !important; border-radius: 8px !important; margin-bottom: 20px; margin-left: 0; }
+        .pricing-card:hover { transform: none !important; box-shadow: none !important; }
         .comparison-table-wrapper { display: none; }
       }
     </style>

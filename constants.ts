@@ -25,7 +25,7 @@ export const MONTHLY_PLANS: PricingPlan[] = [
   {
     id: 'std_m',
     name: 'スタンダード会員',
-    targetAudience: '本格的にAmazon販売を始める方',
+    targetAudience: 'スタンダードアップ',
     price: 13998,
     billingCycle: BillingCycle.MONTHLY,
     features: {
@@ -48,7 +48,7 @@ export const YEARLY_PLANS: PricingPlan[] = [
   {
     id: 'std_y',
     name: 'スタンダード会員',
-    targetAudience: '効率的に運営を続けたい方',
+    targetAudience: '個人・小規模事業者様向け',
     price: 139998,
     originalPrice: 168000,
     billingCycle: BillingCycle.YEARLY,
@@ -70,7 +70,7 @@ export const YEARLY_PLANS: PricingPlan[] = [
   {
     id: 'adv_y',
     name: 'アドバンス会員',
-    targetAudience: '複数アカウント・チーム運営の方',
+    targetAudience: '成長中のビジネス事業者様向け',
     price: 269831,
     originalPrice: 323810,
     billingCycle: BillingCycle.YEARLY,
@@ -91,7 +91,7 @@ export const YEARLY_PLANS: PricingPlan[] = [
   {
     id: 'vip_y',
     name: 'VIP会員',
-    targetAudience: '大規模法人・コンサルティング業',
+    targetAudience: '大規模運用を行う事業者様向け',
     price: 339998,
     originalPrice: 408013,
     billingCycle: BillingCycle.YEARLY,
