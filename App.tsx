@@ -32,14 +32,11 @@ const App: React.FC = () => {
     }
   };
 
-  // Placeholder for backend API interaction
   const handleApplyDiscount = async () => {
     if (!discountCode.trim()) return;
-    
     setIsVerifying(true);
     setDiscountMessage('');
 
-    // SIMULATED API CALL: Replace this with your actual fetch call
     setTimeout(() => {
       const code = discountCode.toUpperCase();
       if (code === 'OFF20') {
@@ -47,7 +44,7 @@ const App: React.FC = () => {
         setDiscountMessage('20%オフクーポンが適用されました！');
       } else if (code === 'SPECIAL') {
         setDiscountRate(0.1);
-        setDiscountMessage('10%オフクーポンが適用されました！');
+        setDiscountMessage('10%オフクーポンがされました！');
       } else {
         setDiscountRate(0);
         setDiscountMessage('無効なクーポンコードです。');
@@ -56,8 +53,14 @@ const App: React.FC = () => {
     }, 600);
   };
 
+  const partnerLogos = [
+    "TOYOTA SYSTEMS", "SARAYA", "NIPPON EXPRESS", "NISSAY", "JAF", "TANAKA",
+    "SEVEN STEP", "FUKUI", "GS YUASA", "BML", "PILOT", "TOHO", "NX 商事",
+    "hoyu", "UGIKO", "MANDOM", "SNK", "BSP", "Dai-ichi Life"
+  ];
+
   return (
-    <div className="app-container pb-5">
+    <div className="app-container">
       <Schema />
 
       {/* Hero Section */}
@@ -91,7 +94,7 @@ const App: React.FC = () => {
       </section>
 
       {/* Pricing Content */}
-      <section className="container-fluid container-xxl" style={{ marginBottom: '100px', maxWidth: '1440px' }}>
+      <section className="container-fluid container-xxl" style={{ marginBottom: '80px', maxWidth: '1440px' }}>
         {viewMode === 'PLANS' ? (
           <div className="pricing-unified-container">
             {/* Refined Discount Code Section */}
@@ -128,26 +131,18 @@ const App: React.FC = () => {
             </div>
 
             <div className="pricing-grid">
-              {/* Row 1: Group Labels */}
               <div className="spacer-cell d-none d-lg-block"></div>
-              
               <div className="group-title-cell d-none d-lg-flex"></div>
-              
               <div className="group-title-cell d-none d-lg-flex">
-                <div className="group-title-label label-monthly">
-                  月間プラン
-                </div>
+                <div className="group-title-label label-monthly">月間プラン</div>
               </div>
-              
               <div className="group-title-cell d-none d-lg-flex" style={{ gridColumn: 'span 3' }}>
                 <div className="group-title-label label-yearly" style={{ position: 'relative' }}>
                   年間プラン <span className="savings-pill">お得！2ヶ月分無料</span>
                 </div>
               </div>
 
-              {/* Row 2: Pricing Cards */}
               <div className="pricing-card-spacer d-none d-lg-block"></div>
-              
               <PricingCard plan={freePlan} isFirst={true} />
               <PricingCard plan={allPaidPlans[0]} discountRate={discountRate} />
               <PricingCard plan={allPaidPlans[1]} isRecommended={true} discountRate={discountRate} />
@@ -182,6 +177,23 @@ const App: React.FC = () => {
         )}
       </section>
 
+      {/* Partners Section */}
+      <section className="py-5 bg-white border-top overflow-hidden">
+        <div className="container-fluid text-center">
+          <h2 className="fw-bold mb-4" style={{ fontSize: '1.5rem' }}>導入企業</h2>
+          <div className="marquee-container">
+            <div className="marquee-content">
+              {/* Double the logos for seamless looping */}
+              {[...partnerLogos, ...partnerLogos].map((name, index) => (
+                <div key={index} className="partner-logo">
+                  {name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="container mb-5 pt-5">
         <h2 className="text-center fw-bold mb-5">よくあるご質問</h2>
@@ -202,6 +214,31 @@ const App: React.FC = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Conversion CTA Section */}
+      <section className="cta-conversion-section">
+        <div className="container">
+          <div className="row align-items-center justify-content-center py-5 px-4 rounded-4 shadow-lg cta-inner">
+            <div className="col-lg-4 text-center mb-4 mb-lg-0">
+              <a 
+                href="https://www.sellersprite.com/jp/index/register" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn btn-cta-register shadow"
+              >
+                今すぐ無料で登録する
+              </a>
+            </div>
+            <div className="col-lg-7 text-start ps-lg-5">
+              <h3 className="fw-bold text-white mb-2">Amazonビジネスの成長を加速させる</h3>
+              <p className="text-white opacity-90 mb-0" style={{ fontSize: '1.05rem', lineHeight: '1.6' }}>
+                市場リサーチから広告分析まで、Amazon出品者に必要なすべてのツールがここに。
+                まずは無料プランから、あなたのビジネスの可能性を広げましょう。
+              </p>
             </div>
           </div>
         </div>

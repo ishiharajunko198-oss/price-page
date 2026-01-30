@@ -96,7 +96,7 @@
         border: 2px solid #e1e1e1;
         border-radius: 8px;
         padding: 3px;
-        width: 300px; /* Slightly wider to ensure row integrity */
+        width: 300px;
         transition: all 0.3s ease;
         box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         flex-shrink: 0;
@@ -113,7 +113,7 @@
         font-size: 0.9rem;
         font-weight: 500;
         color: var(--ss-text-dark);
-        min-width: 0; /* Allows shrinking within flex */
+        min-width: 0;
       }
       .discount-input-group input::placeholder {
         color: #bbb;
@@ -128,7 +128,7 @@
         border-radius: 6px;
         cursor: pointer;
         transition: background 0.2s;
-        white-space: nowrap; /* Forces text to stay in one line */
+        white-space: nowrap;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -222,23 +222,19 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s;
       }
 
-      /* Update: Only show hover effect when the purchase button is hovered */
-      .pricing-card:has(.btn-payment:hover) {
+      .pricing-card:not(.card-free):has(.btn-subscription:hover) {
         transform: translateY(-10px);
         box-shadow: var(--ss-hover-shadow);
         z-index: 20;
         border-bottom: 1px solid #eee; 
       }
 
-      /* Disable Hover Effect for Free Plan - handled by :has rule if desired, but explicitly here too */
-      .pricing-card.card-free:has(.btn-payment:hover) {
-        transform: none;
-        box-shadow: none;
-        z-index: 1;
-        border-bottom: none;
+      .pricing-card.card-free {
+        transform: none !important;
+        box-shadow: none !important;
+        z-index: 1 !important;
       }
 
-      /* Recommended Card styling */
       .pricing-card.card-recommended { 
         z-index: 10;
         background: #fff; 
@@ -247,7 +243,6 @@
         border-radius: 0 !important;
       }
       
-      /* Ribbon Style Badge */
       .badge-recommended {
         position: absolute;
         top: 0;
@@ -292,7 +287,19 @@
       .btn-payment { font-weight: 700; border-radius: 6px; padding: 10px; border: none; width: 100%; font-size: 0.9rem; transition: transform 0.2s; }
       .btn-subscription { background-color: var(--ss-orange); color: white; }
       .btn-subscription:hover { background-color: var(--ss-orange-dark); transform: scale(1.02); }
-      .btn-free { background-color: white; color: var(--ss-blue); border: 1px solid var(--ss-blue); }
+      
+      .btn-free { 
+        background-color: white; 
+        color: var(--ss-blue); 
+        border: 1px solid var(--ss-blue); 
+        transition: none !important; 
+        transform: none !important;
+      }
+      .btn-free:hover {
+        background-color: white;
+        color: var(--ss-blue);
+        transform: none !important;
+      }
       
       .metric-list {
         list-style: none;
@@ -337,6 +344,69 @@
         color: #777; 
         width: 200px;
         background: #eff6fb; 
+      }
+
+      /* Marquee Styles */
+      .marquee-container {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        width: 100%;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+      .marquee-content {
+        display: inline-flex;
+        gap: 30px;
+        animation: scroll 40s linear infinite;
+        padding: 20px 0;
+      }
+      .marquee-content:hover {
+        animation-play-state: paused;
+      }
+      @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .partner-logo {
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: #444;
+        padding: 15px 30px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        background: #fff;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* CTA Conversion Styles */
+      .cta-conversion-section {
+        background: #f8f9fa;
+        padding: 80px 0;
+      }
+      .cta-inner {
+        background: linear-gradient(135deg, #1b75bb 0%, #155a8a 100%);
+      }
+      .btn-cta-register {
+        background: #fff;
+        color: #1b75bb;
+        font-weight: 800;
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-size: 1.25rem;
+        border: none;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-cta-register:hover {
+        transform: scale(1.05);
+        background: #f0f0f0;
+        color: #155a8a;
       }
       
       @media (max-width: 1400px) {

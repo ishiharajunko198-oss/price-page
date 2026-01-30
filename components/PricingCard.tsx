@@ -109,7 +109,14 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
 
         <div className="d-grid mt-3 pt-2">
           {isFree ? (
-            <button className="btn btn-payment btn-free">無料で体験</button>
+            <a 
+              href="https://www.sellersprite.com/jp/index/register" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-payment btn-free text-decoration-none d-flex align-items-center justify-content-center"
+            >
+              無料で体験
+            </a>
           ) : (
             <button className="btn btn-payment btn-subscription shadow-sm">今すぐ購入</button>
           )}
