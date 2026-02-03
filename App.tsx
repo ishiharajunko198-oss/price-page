@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PricingCard from './components/PricingCard';
 import ComparisonTable from './components/ComparisonTable';
@@ -162,7 +161,7 @@ const App: React.FC = () => {
                 <div className="p-4 bg-white rounded text-dark d-inline-block text-start mb-4 shadow-sm mx-3">
                   <p className="mb-2 fw-bold text-warning">APIの主な機能：</p>
                   <ul className="mb-0 small">
-                    <li>全13カ国のリアルタイム市場データ直接取得</li>
+                    <li>全13カ国のリアルタイム市场数据直接取得</li>
                     <li>キーワード逆引き・商品リサーチの自动化</li>
                     <li>自社BIツールやERPへのシームレスな数据連携</li>
                   </ul>
@@ -246,7 +245,7 @@ const App: React.FC = () => {
 
       <footer className="py-5 border-top bg-light">
         <div className="container text-center">
-          <p className="mb-0 text-muted small">&copy; 2024-2025 SellerSprite. Global Data Intelligence for Amazon Sellers.</p>
+          <p className="mb-0 text-muted small">&copy; 2017-2026 SellerSprite. Global Data Intelligence for Amazon Sellers.</p>
         </div>
       </footer>
     </div>

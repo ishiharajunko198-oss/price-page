@@ -13,11 +13,12 @@ export interface PricingPlan {
   billingCycle: BillingCycle;
   isRecommended?: boolean;
   features: {
-    teamSize: string;
-    quota: string;
-    exports: string;
-    countries: string;
-    support: string;
+    accountCount: string;       // アカウント数
+    exportLimit: string;        // エクスポート回数
+    productMonitor: string;     // 商品モニタリング
+    keywordMonitor: string;     // キーワードモニタリング
+    storeMonitor: string;       // 店舗モニタリング
+    browserExt: string;         // ブラウザー拡張機能
   };
   details: string[];
 }

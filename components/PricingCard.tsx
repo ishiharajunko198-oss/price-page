@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PricingPlan, BillingCycle } from '../types';
 
@@ -79,7 +80,6 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
           </div>
 
           <div className="mt-2" style={{ height: '24px' }}>
-            {/* Only yearly plans show effective monthly price */}
             {!isFree && isYearly && (
               <div className="fw-bold" style={{ fontSize: '0.85rem', color: '#000' }}>
                 実質 <span style={{ color: 'var(--ss-orange)' }}>¥{monthlyEquivalent.toLocaleString()}</span>/月
@@ -88,22 +88,41 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
           </div>
         </div>
 
-        <ul className="metric-list mt-auto" style={{ fontSize: '0.85rem' }}>
+        <ul className="metric-list mt-auto" style={{ fontSize: '0.82rem' }}>
           <li>
-            <span className="metric-label" style={{ color: '#000' }}>アカウント数</span>
-            <span className="metric-value" style={{ color: '#000', fontSize: '1rem', fontWeight: 800 }}>{plan.features.teamSize}</span>
+            <span className="metric-label">アカウント数</span>
+            <span className="metric-value">{plan.features.accountCount}</span>
+          </li>
+          <li className="align-items-start">
+            <div className="d-flex flex-column align-items-start" style={{ lineHeight: 1.2 }}>
+              <span className="metric-label">エクスポート回数</span>
+              <span style={{ 
+                fontSize: '0.65rem', 
+                color: '#888', 
+                fontWeight: 500, 
+                marginTop: '1px',
+                visibility: isFree ? 'hidden' : 'visible' // 免费版隐藏文字但保留空间
+              }}>
+                1日50回/アカウント
+              </span>
+            </div>
+            <span className="metric-value">{plan.features.exportLimit}</span>
           </li>
           <li>
-            <span className="metric-label" style={{ color: '#000' }}>エクスポート回数</span>
-            <span className="metric-value" style={{ color: '#000', fontSize: '1rem', fontWeight: 800 }}>{plan.features.quota}</span>
+            <span className="metric-label">商品モニタリング</span>
+            <span className="metric-value">{plan.features.productMonitor}</span>
           </li>
           <li>
-            <span className="metric-label" style={{ color: '#000' }}>数据出力</span>
-            <span className="metric-value" style={{ color: '#000', fontSize: '1rem', fontWeight: 800 }}>{plan.features.exports}</span>
+            <span className="metric-label">キーワードモニタリング</span>
+            <span className="metric-value">{plan.features.keywordMonitor}</span>
           </li>
           <li>
-            <span className="metric-label" style={{ color: '#000' }}>サポート体制</span>
-            <span className="metric-value" style={{ color: '#000', fontSize: '0.85rem' }}>{plan.features.support}</span>
+            <span className="metric-label">店舗モニタリング</span>
+            <span className="metric-value">{plan.features.storeMonitor}</span>
+          </li>
+          <li>
+            <span className="metric-label">ブラウザー拡張機能</span>
+            <span className="metric-value" style={{ color: '#28a745', fontSize: '1.1rem' }}>{plan.features.browserExt}</span>
           </li>
         </ul>
 

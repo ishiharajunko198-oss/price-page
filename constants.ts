@@ -9,11 +9,12 @@ export const MONTHLY_PLANS: PricingPlan[] = [
     price: 0,
     billingCycle: BillingCycle.MONTHLY,
     features: {
-      teamSize: '1名',
-      quota: '1,000回/月',
-      exports: '不可',
-      countries: '日本のみ',
-      support: 'コミュニティのみ'
+      accountCount: '1名',
+      exportLimit: '不可',
+      productMonitor: '0件',
+      keywordMonitor: '0件',
+      storeMonitor: '0件',
+      browserExt: '一部表示'
     },
     details: [
       '基本的な市場リサーチ機能',
@@ -29,16 +30,17 @@ export const MONTHLY_PLANS: PricingPlan[] = [
     price: 13998,
     billingCycle: BillingCycle.MONTHLY,
     features: {
-      teamSize: '3名',
-      quota: '无制限',
-      exports: '100回/月',
-      countries: '全13カ国',
-      support: '標準サポート'
+      accountCount: '1名',
+      exportLimit: '50回/日',
+      productMonitor: '100件',
+      keywordMonitor: '500件',
+      storeMonitor: '50件',
+      browserExt: '全部表示'
     },
     details: [
       'キーワードリサーチ全機能',
       'ライバル商品分析',
-      '広告分析機能',
+      '广告分析機能',
       'ランキング追跡 (最大500件)'
     ]
   }
@@ -48,17 +50,18 @@ export const YEARLY_PLANS: PricingPlan[] = [
   {
     id: 'std_y',
     name: 'スタンダード会員',
-    targetAudience: '個人・小規模事業者様向け',
+    targetAudience: '个人・小規模事業者様向け',
     price: 139998,
     originalPrice: 168000,
     billingCycle: BillingCycle.YEARLY,
     isRecommended: false,
     features: {
-      teamSize: '3名',
-      quota: '无制限',
-      exports: '150回/月',
-      countries: '全13カ国',
-      support: '標準サポート'
+      accountCount: '1主+3子',
+      exportLimit: '200回/日',
+      productMonitor: '100件',
+      keywordMonitor: '500件',
+      storeMonitor: '50件',
+      browserExt: '全部表示'
     },
     details: [
       'キーワード逆引きリサーチ',
@@ -75,16 +78,17 @@ export const YEARLY_PLANS: PricingPlan[] = [
     originalPrice: 323810,
     billingCycle: BillingCycle.YEARLY,
     features: {
-      teamSize: '10名',
-      quota: '无制限',
-      exports: '500回/月',
-      countries: '全13カ国',
-      support: '優先サポート'
+      accountCount: '1主+6子',
+      exportLimit: '350回/日',
+      productMonitor: '300件',
+      keywordMonitor: '1000件',
+      storeMonitor: '100件',
+      browserExt: '全部表示'
     },
     details: [
       'サブアカウント一括管理',
       'API連携サポート',
-      '高度な競合分析',
+      '高度な竞合分析',
       'バルクデータエクスポート'
     ]
   },
@@ -96,11 +100,12 @@ export const YEARLY_PLANS: PricingPlan[] = [
     originalPrice: 408013,
     billingCycle: BillingCycle.YEARLY,
     features: {
-      teamSize: '无制限',
-      quota: '无制限',
-      exports: '无制限',
-      countries: '全13カ国',
-      support: '専任担当者'
+      accountCount: '1主+9子',
+      exportLimit: '500回/日',
+      productMonitor: '500件',
+      keywordMonitor: '2000件',
+      storeMonitor: '200件',
+      browserExt: '全部表示'
     },
     details: [
       '全機能の无制限利用',
@@ -114,7 +119,7 @@ export const YEARLY_PLANS: PricingPlan[] = [
 export const FAQS: FAQItem[] = [
   {
     question: "支払い方法は何がありますか？",
-    answer: "Stripe、PayPal、各種クレジットカード（Visa, Master, JCB）に対応しております。法人様向けの請求書払いについても別途ご相談いただけます。"
+    answer: "Stripe、PayPal、各種クレジットカード（Visa, Master, JCB）に対応しております。法人様向けの請求书払いについても別途ご相談いただけます。"
   },
   {
     question: "プランの変更や解約はいつでもできますか？",
@@ -125,7 +130,19 @@ export const FAQS: FAQItem[] = [
     answer: "マイページの料金プラン選択画面から、ご希望のプランの決済ボタンをクリックしていただくだけで、即座に機能がアップグレードされます。"
   },
   {
+    question: "サブアカウントの追加方法を教えてください。",
+    answer: "マイページの「アカウント設定」或者「チーム管理」メニューから、新しいメンバーのメールアドレスを入力して招待を送ることができます。プランごとの上限人数まで追加可能です。"
+  },
+  {
+    question: "1つのアカウントを複数のデバイスで同時に利用できますか？",
+    answer: "技術的には可能ですが、セキュリティ保護と数据整合性の観点から、複数人での同時操作が必要な場合はサブアカウントの発行を強くお勧めしております。"
+  },
+  {
+    question: "もしアカウントがロック（封鎖）された場合はどうすればいいですか？",
+    answer: "不正アクセスの検知や利用規約違反の疑いにより自动ロックされる場合があります。その際は至急、登録メールアドレスをご確認いただくか、サポート（support@sellersprite.com）までご連絡ください。"
+  },
+  {
     question: "複数人で同じアカウントを使えますか？",
-    answer: "プランごとに設定された「チーム协作支持人数」の範囲内であれば、サブアカウントを発行して安全に共有いただけます。"
+    answer: "プランごとに設定された「チーム协作支持人数」の范围内であれば、サブアカウントを発行して安全に共有いただけます。"
   }
 ];
