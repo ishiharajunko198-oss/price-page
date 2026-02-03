@@ -54,21 +54,45 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
         </div>
 
         <div className="text-center mb-2">
-          <div className="price-main-wrapper" style={{ color: '#000' }}>
-            {!isFree && <span className="small align-top" style={{ fontSize: '1.2rem', fontWeight: 700 }}>¥</span>}
-            
-            {discountRate > 0 && !isFree && (
-              <span className="price-strikethrough" style={{ fontSize: '1rem' }}>{plan.price.toLocaleString()}</span>
-            )}
-
-            <span className="price-main" style={{ fontSize: isFree ? '1.8rem' : '3.2rem', color: discountRate > 0 ? 'var(--ss-orange)' : '#000', lineHeight: 1.1 }}>
-              {isFree ? '無料' : currentPrice.toLocaleString()}
-            </span>
-            
-            {!isFree && <span className="small" style={{ fontSize: '1rem', color: '#000', marginLeft: '2px' }}>/{isYearly ? '年' : '月'}</span>}
-            
-            {discountRate > 0 && !isFree && (
-              <span className="discount-applied-badge">-{Math.round(discountRate * 100)}%</span>
+          <div className="price-main-wrapper" style={{ 
+            color: '#000', 
+            display: 'flex', 
+            alignItems: 'baseline', 
+            justifyContent: 'center', 
+            whiteSpace: 'nowrap',
+            flexWrap: 'nowrap'
+          }}>
+            {!isFree ? (
+              <>
+                {discountRate > 0 ? (
+                  <>
+                    <span className="price-strikethrough" style={{ fontSize: '0.95rem', marginRight: '6px', color: '#999', textDecoration: 'line-through' }}>
+                      ¥{plan.price.toLocaleString()}
+                    </span>
+                    <span className="price-main" style={{ fontSize: '2.6rem', color: 'var(--ss-orange)', lineHeight: 1.1 }}>
+                      {currentPrice.toLocaleString()}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="small" style={{ fontSize: '1.1rem', fontWeight: 700, marginRight: '1px' }}>¥</span>
+                    <span className="price-main" style={{ fontSize: '2.6rem', color: '#000', lineHeight: 1.1 }}>
+                      {plan.price.toLocaleString()}
+                    </span>
+                  </>
+                )}
+                
+                {/* Only show unit if discount code is NOT applied */}
+                {discountRate === 0 && (
+                  <span className="small" style={{ fontSize: '0.95rem', color: '#000', marginLeft: '2px', fontWeight: 500 }}>
+                    /{isYearly ? '年' : '月'}
+                  </span>
+                )}
+                
+                {/* Discount percentage badge removed as per request when discount is applied */}
+              </>
+            ) : (
+              <span className="price-main" style={{ fontSize: '1.5rem', color: '#000' }}>無料</span>
             )}
           </div>
 
@@ -131,7 +155,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
               className="text-center py-2" 
               style={{ fontSize: '0.8rem', color: '#1b75bb', fontWeight: '700', lineHeight: '1.5' }}
             >
-              無料会員は検索無制限／<br/>一部データ閲覧制限あり
+              無料会員は検索无制限／<br/>一部数据閲覧制限あり
             </div>
           ) : (
             <button className="btn btn-payment btn-subscription shadow-sm">サブスクリプション</button>
