@@ -43,7 +43,7 @@ const App: React.FC = () => {
         setDiscountMessage('20%オフクーポンが適用されました！');
       } else if (code === 'SPECIAL') {
         setDiscountRate(0.1);
-        setDiscountMessage('10%オフクーポンがされました！');
+        setDiscountMessage('10%オフクーポンが適用されました！');
       } else {
         setDiscountRate(0);
         setDiscountMessage('無効なクーポンコードです。');
@@ -86,8 +86,9 @@ const App: React.FC = () => {
             </button>
           </div>
 
-          <p className="mt-2 fw-normal opacity-90 px-3 small">
-            契約日から30日間（月単位）または365日間（年単位）の利用が保証されます。
+          <p className="mt-2 fw-normal opacity-90 px-3" style={{ fontSize: '1.15rem' }}>
+            月・年単位プランを購入すると、契約はそれぞれ30日・365日になります！<br />
+            つまりいつ購入したかと関係なく、契約日から30日間・365日間使えますよ～
           </p>
         </div>
       </section>

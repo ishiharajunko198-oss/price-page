@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PricingPlan, BillingCycle } from '../types';
 
@@ -101,7 +100,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
                 color: '#888', 
                 fontWeight: 500, 
                 marginTop: '1px',
-                visibility: isFree ? 'hidden' : 'visible' // 免费版隐藏文字但保留空间
+                visibility: isFree ? 'hidden' : 'visible' 
               }}>
                 1日50回/アカウント
               </span>
@@ -128,16 +127,14 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, isFirst, isLast, isReco
 
         <div className="d-grid mt-3 pt-2">
           {isFree ? (
-            <a 
-              href="https://www.sellersprite.com/jp/index/register" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-payment btn-free text-decoration-none d-flex align-items-center justify-content-center"
+            <div 
+              className="text-center py-2" 
+              style={{ fontSize: '0.8rem', color: '#1b75bb', fontWeight: '700', lineHeight: '1.5' }}
             >
-              無料で体験
-            </a>
+              無料会員は検索無制限／<br/>一部データ閲覧制限あり
+            </div>
           ) : (
-            <button className="btn btn-payment btn-subscription shadow-sm">今すぐ購入</button>
+            <button className="btn btn-payment btn-subscription shadow-sm">サブスクリプション</button>
           )}
         </div>
       </div>
